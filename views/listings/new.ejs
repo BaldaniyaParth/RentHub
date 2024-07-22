@@ -1,0 +1,155 @@
+<% layout("/layouts/boilerplate") %>
+<div class="row mt-3">
+  <div class="col-8 offset-2">
+    <h3>Create a New Listing</h3>
+    <form
+      method="POST"
+      action="/listings"
+      novalidate
+      class="needs-validation"
+      enctype="multipart/form-data"
+      onsubmit="return validateForm()"
+    >
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input
+          id="title"
+          name="listing[title]"
+          placeholder="Enter title"
+          type="text"
+          class="form-control"
+          required
+        />
+        <div class="valid-feedback">Title looks good!</div>
+        <div class="invalid-feedback">Please enter a title.</div>
+      </div>
+      
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea
+          id="description"
+          name="listing[description]"
+          placeholder="Enter description"
+          class="form-control"
+          required
+        ></textarea>
+        <div class="invalid-feedback">Please enter a short description.</div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-10">
+          <label for="image" class="form-label">Upload Image</label>
+          <input
+            type="file"
+            name="listing[image]"
+            class="form-control border border-black border-opacity-50"
+            id="verify-img"
+            required
+          />
+          <p id="errorContainer"></p>
+        </div>
+        <div class="col-2">
+          <label
+            class="form-control border border-white"
+            style="margin-left: -15px"
+            for="verify"
+            >Verify</label
+          >
+          <input
+            type="checkbox"
+            id="verify"
+            class="form-btn btn ms-2 border border-black border-opacity-50"
+            required
+            style="height: 25px; width: 25px"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="mb-3 col-md-4">
+          <label for="price" class="form-label">Price</label>
+          <input
+            id="price"
+            name="listing[price]"
+            placeholder="40,000"
+            type="number"
+            class="form-control"
+            required
+          />
+          <div class="invalid-feedback">Price should be valid.</div>
+        </div>
+        <div class="mb-3 col-md-8">
+          <label for="category" class="form-label">Category</label>
+          <select id="category" name="listing[category]" class="form-select" required>
+            <option value="1">Trending</option>
+            <option value="2">Rooms</option>
+            <option value="3">Cities</option>
+            <option value="4">Mountains</option>
+            <option value="6">Beach</option>
+            <option value="7">Camping</option>
+            <option value="8">Skiing</option>
+            <option value="9">Pools</option>
+          </select>
+          <div class="invalid-feedback">Please select a category.</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="mb-3 col-md-4">
+          <label for="location" class="form-label">Location</label>
+          <input
+            id="location"
+            name="listing[location]"
+            placeholder="Jaipur, Rajasthan"
+            type="text"
+            class="form-control"
+            required
+          />
+          <div class="invalid-feedback">Location should be valid.</div>
+        </div>
+
+        <div class="mb-3 col-md-8">
+          <label for="country" class="form-label">Country</label>
+          <input
+            id="country"
+            name="listing[country]"
+            placeholder="India"
+            type="text"
+            class="form-control"
+            required
+          />
+          <div class="invalid-feedback">Country name should be valid.</div>
+        </div>
+      </div>
+
+      <button id="addButton" class="btn btn-dark add-btn mt-3">Add</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  function validateForm() {
+    const maxSize = 1 * 1024 * 1024; // 1MB in bytes
+    const fileInput = document.getElementById("verify-img");
+    const verify = document.getElementById("verify");
+    const errorContainer = document.getElementById("errorContainer");
+
+    if (fileInput.files.length === 0) {
+      errorContainer.innerText = "Please select an image to upload.";
+      errorContainer.style.color = "red";
+      verify.checked = false;
+      return false; // Prevent form submission
+    }
+
+    const file = fileInput.files[0];
+    if (file.size > maxSize) {
+      errorContainer.innerText = "File size exceeds the limit (1MB).";
+      errorContainer.style.color = "red";
+      verify.checked = false;
+      return false; // Prevent form submission
+    }
+    
+    errorContainer.innerText = ""; // Clear error message
+    return true; // Allow form submission
+  }
+</script>
