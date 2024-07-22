@@ -43,7 +43,7 @@ if (!dburl) {
 const store = MongoStore.create({
   mongoUrl: dburl,
   crypto: {
-    secret: process.env.SESSION_SECRET || "sessionsecretcode",
+    secret: process.env.SESSION_SECRET,
   },
   touchAfter: 24 * 3600, // Update session only once in a 24-hour period
 });
@@ -55,7 +55,7 @@ store.on("error", (err) => {
 // Session configuration
 const sessionOptions = {
   store,
-  secret: process.env.SESSION_SECRET || "sessionsecretcode",
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
