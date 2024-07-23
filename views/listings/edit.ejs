@@ -76,7 +76,8 @@
         </div>
         <div class="mb-3 col-md-8">
           <label for="category" class="form-label">Category</label>
-          <select name="listing[category]" class="form-select">
+          <select name="listing[category]"  class="form-select">
+            <option value="<%= listing.category %>"></option>
             <option value="1">Trending</option>
             <option value="2">Rooms</option>
             <option value="3">Cities</option>
@@ -86,8 +87,6 @@
             <option value="7">Camping</option>
             <option value="8">Skiing</option>
             <option value="9">Pools</option>
-            <option value="10">Arctic</option>
-            <option value="11">Design</option>
           </select>
           <div class="invalid-feedback">Please select a category</div>
         </div>
@@ -128,14 +127,6 @@
     const fileInput = document.getElementById("verify-img");
     const verify = document.getElementById("verify");
     const errorContainer = document.getElementById("errorContainer");
-
-    // Check if an image is selected and its size
-    if (fileInput.files.length === 0) {
-      errorContainer.innerText = "Please select an image to upload.";
-      errorContainer.style.color = "red";
-      verify.checked = false;
-      return false; // Prevent form submission
-    }
 
     const file = fileInput.files[0];
     if (file.size > maxSize) {
