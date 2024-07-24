@@ -23,7 +23,7 @@ RentHub is a comprehensive travel listings platform that allows users to create,
 
 ## Live Demo
 
-- Check out the live demo of RentHub: https://renthub-dy4f.onrender.com/listings
+- Check out the live demo of RentHub: [https://renthub-parth.onrender.com](https://renthub-parth.onrender.com)
 
 ## Installation
 
